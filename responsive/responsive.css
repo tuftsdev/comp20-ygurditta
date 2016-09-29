@@ -1,0 +1,31 @@
+@media (min-width: 1200px) {
+	.homer {
+		width: 313px;
+		height: 313px;
+		background: url(homer.jpg) 0px 0px;
+	}
+}
+
+@media (min-width: 800px) and (max-width: 1200px) {
+	.homer {
+		width: 313px;
+		height: 313px;
+		background: url(homer.jpg) 313px 0px;
+	}
+}
+
+@media (min-width: 500px) and (max-width: 800px) {
+	.homer {
+		width: 313px;
+		height: 313px;
+		background: url(homer.jpg) 0px -313px;
+	}
+}
+
+@media (max-width: 500px) {
+	.homer {
+		width: 313px;
+		height: 313px;
+		background: url(homer.jpg) 313px -313px;
+	}
+}
