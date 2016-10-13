@@ -1,0 +1,22 @@
+body {
+	text-align: center;
+}
+
+video {
+	width: 750px;
+}
+
+h1 {
+	font-family: verdana;
+}
+
+p {
+	font-size: 16px;
+	font-family: verdana;
+	font-style: bold;
+}
+
+#movie_quotes {
+	padding-left: 25%;
+	padding-right: 25%;
+}
