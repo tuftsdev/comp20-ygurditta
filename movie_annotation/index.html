@@ -19,7 +19,6 @@
 	vid.play();
 	vid.addEventListener("timeupdate", function() {
 		var time = vid.currentTime;
-		console.log(time);
 		if (time < 24) {
 			subtitle.innerHTML = "<p> </p>";
 		}
