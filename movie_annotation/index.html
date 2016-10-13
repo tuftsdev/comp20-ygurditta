@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Classic Movie</title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+<h1 id="title">Classic Movie</h1>
+
+<video src="https://www.cs.tufts.edu/comp/20/classic.mp4" id="classic_video" controls></video>
+<div id="movie_quotes"></div>
+
+<script>
+	var vid = document.getElementById("classic_video");
+	var subtitle = document.getElementById("movie_quotes");
+	var time = vid.currentTime;
+	vid.play();
+	vid.addEventListener("timeupdate", printSubtitle(), false);
+	function printSubtitle() {
+		if (time < 24) {
+			subtitle.innerHTML = "<p>Welcome</p>";
+		}
+		else if (time > 24 && time < 29) {
+			subtitle.innerHTML = "<p>Igor: DR. FRANKENSTEIN?!?!?</p>";
+		}
+		else if (time > 29 && time < 34) {
+			subtitle.innerHTML = "<p>Dr. Frederick Frankenstein: Frokensteen.</p>";
+		}
+		else if (time > 34 && time < 36) {
+			subtitle.innerHTML = "<p>DIgor: You're putting me on.</p>";
+		}
+		else if (time > 36 && time < 38) {
+			subtitle.innerHTML = '<p>Dr. Frederick Frankenstein: No, it pronounced, "Frokensteen".</p>';
+		}
+		else if (time > 38 && time < 41) {
+			subtitle.innerHTML = "<p>Igor: Do you also say Froaderick?</p>";
+		}
+		else if (time > 41 && time < 44) {
+			subtitle.innerHTML = '<p>Dr. Frederick Frankenstein: No . . . "Frederick."</p>';
+		}
+		else if (time > 44 && time < 47) {
+			subtitle.innerHTML = "<p>Igor: Well, why isn't it 'Froaderick Frokensteen'?</p>";
+		}
+		else if (time > 47 && time < 50) {
+			subtitle.innerHTML = "<p>Dr. Frederick Frankenstein: It isn't, it's 'Frederick Frokensteen'</p>";
+		}
+		else if (time > 50 && time < 52) {
+			subtitle.innerHTML = '<p>Igor: I see.</p>';
+		}
+		else if (time > 52 && time < 53) {
+			subtitle.innerHTML = '<p>Dr. Frederick Frankenstein: You must be Igor. [He pronounces it ee-gor.]</p>';
+		}
+		else if (time > 53 && time < 57) {
+			subtitle.innerHTML = "<p>Igor: No, it's pronounced 'eye-gor.'</p>";
+		}
+		else if (time > 57 && time < 59) {
+			subtitle.innerHTML = '<p>Dr. Frederick Frankenstein: But they told me it was "ee-gor"...</p>';
+		}
+		else if (time > 59 && time < 61) {
+			subtitle.innerHTML = "<p>Igor: Well, they were wrong then, weren't they?</p>";
+		}
+		else if (time > 61 && time < 64) {
+			subtitle.innerHTML = "<p>Dr. Frederick Frankenstein: Uh, you were sent here by Herr Falkstein, weren't you?</p>";
+		}
+		else if (time > 64 && time < 69) {
+			subtitle.innerHTML = '<p>Igor: Yes. My grandfather used to work for your grandfather.</p>';
+		}
+		else if (time > 69 && time < 72) {
+			subtitle.innerHTML = '<p>Dr. Frederick Frankenstein: How nice.</p>';
+		}
+		else if (time > 72 && time < 74) {
+			subtitle.innerHTML = '<p>Igor: Of course the rates have gone up.</p>';
+		}
+		else if (time > 74 && time < 89) {
+			subtitle.innerHTML = "<p>Dr. Frederick Frankenstein: Of course, of course, I'm sure we'll get along splendidly. Oh, I uh, you know I don't mean to embarrass you, but I'm rather a brilliant surgeon. Perhaps I can help you with that hump.</p>";
+		}
+		else if (time > 89 && time < 95) {
+			subtitle.innerHTML = '<p>What hump?</p>';
+		}
+		*/
+</script>
+</body>
+</html>	
