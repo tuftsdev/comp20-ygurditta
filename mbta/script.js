@@ -1,14 +1,24 @@
+var myLat;
+var myLong;
 var map;
 
-function success(pos) {
-  var crd = pos.coords;
+function getLocation() {
+        navigator.geolocation.getCurrentPosition(showPosition);
 }
 
-navigator.geolocation.getCurrentPosition(success);
+function showPosition(position) {
+	myLat = position.coords.latitude;
+    myLong = position.coords.longitude;
+    console.log(myLat);
+    console.log(myLong);
+}
 
 function initMap() {
+	getLocation();
+	console.log(myLat);
+    console.log(myLong);
     map = new google.maps.Map(document.getElementById('map'), {
-	    center: {lat: crd.latitude, lng: crd.longitude},
-    	zoom: 8
+		center: {lat: myLat, lng: myLong},
+	    zoom: 13
 	});
 }
