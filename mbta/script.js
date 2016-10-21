@@ -1,7 +1,14 @@
 var map;
+
+function success(pos) {
+  var crd = pos.coords;
+}
+
+navigator.geolocation.getCurrentPosition(success);
+
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-	    center: {lat: -34.397, lng: 150.644},
+	    center: {lat: crd.latitude, lng: crd.longitude},
     	zoom: 8
 	});
 }
