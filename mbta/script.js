@@ -71,6 +71,7 @@ function printMap() {
 }
 
 var nextTrainInfo = "";
+var nextTrainInfoBox;
 
 function addPins() {
 	request = new XMLHttpRequest();
@@ -91,7 +92,6 @@ function addPins() {
 function infoPins() {
 	for (var i=0; i < stations_array.length; i++) {
 					// received help with this loop
-					var nexTrainInfoBox
 					var marker = new google.maps.Marker({
 					    position: {lat: stations_array[i].lat, lng: stations_array[i].lon},
 					    map: map,
@@ -109,14 +109,27 @@ function infoPins() {
 					      	}
 					    });
 					});		
-								nextTrainInfoBox = new google.maps.InfoWindow({
+		
+								var nextTrainInfoBox = new google.maps.InfoWindow({
 							        content: this.nextTrainInfo
 							    });
 							    marker.addListener('click', function() {
-							    	nextTrainInfoBox.setContent(nextTrainInfo);
-							        nextTrainInfoBox.open(map, this);
 							    	console.log(nextTrainInfo);
+							        nextTrainInfoBox.open(map, this);
 							    });
+							    console.log(i);
+							    console.log(nextTrainInfo);
+							    /*
+							    var infowindow = new google.maps.InfoWindow();
+							    google.maps.event.addListener(marker, 'click', (function (marker, i, infowindow) {
+							        return function () {
+							            infowindow.setContent(this.nextTrainInfo);
+							            infowindow.open(map, this);
+							        };
+							    })(marker, i, infowindow));
+
+							    google.maps.event.trigger(marker, 'click');
+							    */
 			}
 }
 
