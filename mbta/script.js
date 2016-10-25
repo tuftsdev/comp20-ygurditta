@@ -70,46 +70,54 @@ function printMap() {
 	addPins();
 }
 
+var nextTrainInfo = "";
+
 function addPins() {
-	stations_array.forEach(function(station) {
-		var marker = new google.maps.Marker({
-		    position: {lat: station.lat, lng: station.lon},
-		    map: map,
-		    title: station.name,
-		    icon: {
-	    		size: new google.maps.Size(50, 50),
-            	scaledSize: new google.maps.Size(50, 50),
-	    		url: 'red-line-pin.png'
-        	}
-		});
-	});
-	/*
-		for (var i=0; i < stations_array.length; i++) {
-	    	request = new XMLHttpRequest();
-  			request.open("get", "https://rocky-taiga-26352.herokuapp.com/redline.json", true);
-  			request.onreadystatechange = funex;
-  			request.send();
-			var nextTrainInfo = "";
-			// received help with this loop
-			schedInfo.TripList.Trips.forEach(function(train){
-			    train.Predictions.forEach(function(time){
-			      	if(time.Stop == stations_array[i].name) {
-			      		console.log(time.Stop);
-			      		console.log(train.Destination);
-			      		console.log(time.Seconds);
-			        	nextTrainInfo = "<p>The destination of next train is " + train.Destination + " in " + time.Seconds + " seconds.</p>";
-			      	}
-			    });
-			});
-			var nexTrainInfoBox = new google.maps.InfoWindow({
-		        content: nextTrainInfo
-		    });
-		    marker.addListener('click', function() {
-		        nexTrainInfoBox.open(map, marker);
-		    });
-		}
-		*/
+	request = new XMLHttpRequest();
+  	request.open("get", "https://rocky-taiga-26352.herokuapp.com/redline.json", true);
+  	request.onreadystatechange = function() {
+  				if (request.readyState == 4 && request.status == 200) {
+  					theData = request.responseText;
+    				schedInfo = JSON.parse(theData);
+					infoPins();
+				}
+	};
+	request.send();
+
+	
 	addPolylines();
+}
+
+function infoPins() {
+	for (var i=0; i < stations_array.length; i++) {
+					// received help with this loop
+					var nexTrainInfoBox
+					var marker = new google.maps.Marker({
+					    position: {lat: stations_array[i].lat, lng: stations_array[i].lon},
+					    map: map,
+					    title: stations_array[i].name,
+					    icon: {
+				    		size: new google.maps.Size(50, 50),
+			            	scaledSize: new google.maps.Size(50, 50),
+				    		url: 'red-line-pin.png'
+			        	}
+					});
+					schedInfo.TripList.Trips.forEach(function(train){
+					    train.Predictions.forEach(function(time){
+					      	if(time.Stop == stations_array[i].name) {
+					        	nextTrainInfo = "<p>The destination of next train is " + train.Destination + " in " + time.Seconds + " seconds.</p>";
+					      	}
+					    });
+					});		
+								nextTrainInfoBox = new google.maps.InfoWindow({
+							        content: this.nextTrainInfo
+							    });
+							    marker.addListener('click', function() {
+							    	nextTrainInfoBox.setContent(nextTrainInfo);
+							        nextTrainInfoBox.open(map, this);
+							    	console.log(nextTrainInfo);
+							    });
+			}
 }
 
 function funex() {
