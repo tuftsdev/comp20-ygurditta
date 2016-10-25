@@ -52,11 +52,19 @@ function printMap() {
 	    map: map,
 	    title: "My Location",
 	    icon: {
-	    	 size: new google.maps.Size(50, 50),
+	    	size: new google.maps.Size(50, 50),
             scaledSize: new google.maps.Size(50, 50),
 	    	url: 'my-location-pin.png'
         }
-		});
+	});
+	var closestData = closestStation();
+	var infoBox = "<p>Closest station is " + closestData[0] + " and it is " + closestData[1] + " miles away.</p>";
+	var locationInfoBox = new google.maps.InfoWindow({
+        content: infoBox
+    });
+    marker.addListener('click', function() {
+        locationInfoBox.open(map, marker);
+    });
 	addPins();
 }
 
@@ -136,6 +144,56 @@ function makeRequest() {
  	request.send();
 }
 
+function closestStation() {
+	var myLoc = [myLat, myLong];
+	var closestStation = stations_array[0];
+	var shortestDistance = getDistance([stations_array[0].lat, stations_array[0].lon], myLoc);
+  	for (var i=1; i < stations_array.length; i++) {
+	    stationDistance = getDistance([stations_array[i].lat, stations_array[i].lon], myLoc);
+	    if (stationDistance < shortestDistance) {
+	      shortestDistance = stationDistance;
+	      closestStation = stations_array[i];
+	    }
+  	}
+
+  	closestStationPolyline = new google.maps.Polyline({
+	    path:[{lat: myLat, lng: myLong}, {lat:closestStation.lat, lng:closestStation.lon}],
+	    strokeColor: '#0000FF',
+        strokeOpacity: 1.0,
+        strokeWeight: 3
+  	});
+
+  	closestStationPolyline.setMap(map);
+
+  	return [closestStation.name, shortestDistance];
+}
+
+// Resource: http://stackoverflow.com/questions/14560999/using-the-haversine-formula-in-javascript
+function getDistance(location1, location2) {
+  	Number.prototype.toRad=function(){
+    	return this*Math.PI/180;
+  	}
+
+  	var lat1 = location1[0];
+  	var lon1 = location1[1];
+  	var lat2 = location2[0];
+  	var lon2 = location2[1];
+
+  	var R=6371;
+
+ 	var x1 = lat2-lat1;
+    var dLat = x1.toRad();
+    var x2 = lon2-lon1;
+    var dLon = x2.toRad();
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+        Math.sin(dLon/2) * Math.sin(dLon/2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    // adjust for miles
+  	var d = R * c;
+
+  return d;
+}
 
 
 
