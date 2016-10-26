@@ -1,4 +1,4 @@
-## Assignment 2: MTBA
+## Assignment 2: MBTA
 
 I have correctly implement the request for the MBTA JSON file that was then parsed correctly.
 I was able to create polylines and insert markers with custom icons on the map using Google Maps API.
