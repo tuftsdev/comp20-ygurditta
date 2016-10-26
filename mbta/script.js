@@ -72,6 +72,7 @@ function printMap() {
 
 var nextTrainInfo = "";
 var nextTrainInfoBox;
+var infowindow;
 
 function addPins() {
 	request = new XMLHttpRequest();
@@ -84,8 +85,6 @@ function addPins() {
 				}
 	};
 	request.send();
-
-	
 	addPolylines();
 }
 
@@ -109,27 +108,14 @@ function infoPins() {
 					      	}
 					    });
 					});		
-		
-								var nextTrainInfoBox = new google.maps.InfoWindow({
-							        content: this.nextTrainInfo
-							    });
-							    marker.addListener('click', function() {
-							    	console.log(nextTrainInfo);
-							        nextTrainInfoBox.open(map, this);
-							    });
-							    console.log(i);
 							    console.log(nextTrainInfo);
-							    /*
-							    var infowindow = new google.maps.InfoWindow();
-							    google.maps.event.addListener(marker, 'click', (function (marker, i, infowindow) {
-							        return function () {
-							            infowindow.setContent(this.nextTrainInfo);
-							            infowindow.open(map, this);
-							        };
-							    })(marker, i, infowindow));
-
-							    google.maps.event.trigger(marker, 'click');
-							    */
+							  	infowindow = new google.maps.InfoWindow({
+							    	content: this.nextTrainInfo
+							    });
+							  	google.maps.event.addListener(marker, 'click', function() {
+								    infowindow.open(map, this);
+								    infowindow.setContent(this.nextTrainInfo);
+							  	});
 			}
 }
 
