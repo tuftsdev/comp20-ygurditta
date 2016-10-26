@@ -108,12 +108,14 @@ function infoPins() {
 					      	}
 					    });
 					});		
-							    console.log(nextTrainInfo);
+							    
 							  	infowindow = new google.maps.InfoWindow({
 							    	content: this.nextTrainInfo
 							    });
+							    console.log(nextTrainInfo);
 							  	google.maps.event.addListener(marker, 'click', function() {
 								    infowindow.open(map, this);
+								    // infowindow.setContent(nextTrainInfo);
 								    infowindow.setContent(this.nextTrainInfo);
 							  	});
 			}
