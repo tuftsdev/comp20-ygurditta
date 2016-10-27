@@ -9,14 +9,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
         $( document ).ready(function() {
-            var i = 0;
-            while (i%1==0) {
-                Date = new Date();
-                localStorage.entry = $('#msg').val();
-                elem = document.getElementById("log");
-                elem.innerHTML = "<p>" + Date.prototype.toDateString() + ": " + localStorage['entry'];
-                i++;
+            localStorage.setItem('entry', msg);
+            currDate = Date();
+            for (key in localStorage) {
+                $("#log").append(localStorage[entry] + "<br>");
             }
+            var string = "hello";
+            $("#log").append(currDate.toString());
+            $("#log").append(" - ");
+            $("#log").append(string);
         });
     </script>
 </head>
