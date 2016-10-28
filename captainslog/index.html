@@ -8,16 +8,23 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
-        $( document ).ready(function() {
-            localStorage.setItem('entry', msg);
+        $(document).ready(function() {  
             currDate = Date();
-            for (key in localStorage) {
-                $("#log").append(localStorage[entry] + "<br>");
-            }
-            var string = "hello";
-            $("#log").append(currDate.toString());
-            $("#log").append(" - ");
-            $("#log").append(string);
+                if (localStorage) {
+                    var oldData = localStorage.getItem('localData');
+                    if (oldData) {
+                        $("#log").append(oldData + "<br>");
+                    }
+                }
+            var printString = "";
+            $('#msg').keypress(function(event) {
+                if (event.keyCode == 13) {
+                    printString = $('#msg').val();
+                    $("#log").prepend(currDate.toString() + " - " + printString + "<br>");
+                    storeData = $('#log').html();
+                    localStorage.setItem('localData', storeData);
+                }
+            }); 
         });
     </script>
 </head>
