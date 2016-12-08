@@ -33,7 +33,7 @@
 			<li>I made a POST request with fewer data values than I should have been able to. The data I submitted was inserted as is,
 			without checking for the data quantity and types. View missing grid details below.</li>
 			<img src="pics/terminal_redirect.png" /><br>
-			<img src="pics/score_board.png" /><br>
+			<img src="pics/score_board.png" id="long" /><br>
 			<li>Recommendation: Add an if statement in the POST method of the index.js file such that it checks that all data types exists and
 			are not null. Also ensure that no other key value pairs are being entered into the database that are not expected.</li>
 		</ul>
@@ -65,6 +65,11 @@
 		</ul>
 	</p>
 
-	<p>Conclusion</p>
+	<p>All in all, there are some serious concerns with this application the way it is right now. We offer the option to hire us and remedy all 
+	security issues with this application for $240.00. In the future, we recommend you always keep security in mind and hire developers with
+	the necessity of security in mind. It will take you a long way and protect your from malicious attempts and attacks on your sites and 
+	applications.</p>
+
+	<h3>Important Sanitizing Code (from CTO of our firm, Ming): text = text.replace(/[^\w\s]/gi, ''); // removes all special characters.</h3>
 </body>
 </html>
