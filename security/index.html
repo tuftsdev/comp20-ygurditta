@@ -9,9 +9,33 @@
 	their username. The username is then stored with the user's other game details such as their final score and board
 	placement at time of game end. The application then also allows these usernames and scores can then later be retrieved
 	in JSON or an HTML scoreboard.</p>
-	<p>Methodology</p>
-	<p>Abstract of Findings</p>
-	<p>Issues Found</p>
+	<p>In order to identify concerns with security in this application, I heavily utilized cURL. With the use of curl, I was
+	able to make an HTTP POST request to the web server. This just means that I was able to send data over to the web server.
+	From there the web server decides what to do with the data sent by me - in this case, the server inputs the data into a database.
+	That same data is then extracted from the database and displayed on a webpage when a user navigates to a specific URL. Other
+	than cURL, I used a plugin called Tamper Data to intercept and manipulate the data being submitted to the server (and database) after the
+	data had already been submitted from the webpage. This allowed me to manually change certain data that I am not able to do from the front
+	end.</p>
+	<p>There were several issues found with the application in its current state. The biggest issue involved the lacking limitations to what 
+	information could be submitted in the username box. This leaves the application prone to attacks on the main page with very minimal
+	modifications using outside tools. Using tools to further manipulate the application has led to the discovery of other vulnerabilities.
+	This includes the ability to inject a script into the database. Once the data from the database is attempted to be displayed on a webpage,
+	the script is run. In the case I tested, I inserted code to automatically redirect to another page. Using the same vulnerability, I was able
+	to create an alert pop up box that says the page has been hacked. Other than that, I was able to enter only partial data into the database as
+	well as more than three pairs of data. This opens up the database to improper data sources and types.
+	For example, I was able to enter letters in a data key for storing numbers.</p>
+	<p>
+		<th>Issue #1 Found: Database Injection - Redirecting Webpage</th>
+		<td>Location: URL is https://stormy-reef-94850.herokuapp.com/</td>
+		<td>Severity: High - can be used for malicious attacks</td>
+		<td>I injected a line of code into the database through curl to make it go to another webpage.</td>
+		<img src="pics/terminal_redirect.png" /><br>
+		<td>Difficult to show this actually occuring in a screenshot or photo. If https://stormy-reef-94850.herokuapp.com/ is typed in browser, 
+		the page will redirect.</td>
+		<td>Recommendation: Add a line of code that sanitizes and input data. In the index.js file under the POST method where the request string 
+		is taken in, it should be sanitized prior to being entered into the database. Sample code shown at bottom of report.</td>
+	</p>
+	
 	<p>Conclusion</p>
 </body>
 </html>
