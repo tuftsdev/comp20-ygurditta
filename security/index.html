@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Security Analysis</title>
+	<link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
 	<p>As a security consultant, I've been hired to detect and resolve security issues that exist in the application.
@@ -25,17 +26,45 @@
 	well as more than three pairs of data. This opens up the database to improper data sources and types.
 	For example, I was able to enter letters in a data key for storing numbers.</p>
 	<p>
-		<th>Issue #1 Found: Database Injection - Redirecting Webpage</th>
-		<td>Location: URL is https://stormy-reef-94850.herokuapp.com/</td>
-		<td>Severity: High - can be used for malicious attacks</td>
-		<td>I injected a line of code into the database through curl to make it go to another webpage.</td>
-		<img src="pics/terminal_redirect.png" /><br>
-		<td>Difficult to show this actually occuring in a screenshot or photo. If https://stormy-reef-94850.herokuapp.com/ is typed in browser, 
-		the page will redirect.</td>
-		<td>Recommendation: Add a line of code that sanitizes and input data. In the index.js file under the POST method where the request string 
-		is taken in, it should be sanitized prior to being entered into the database. Sample code shown at bottom of report.</td>
+		<ul>
+			<li>Issue #1 Found: Bad Coding Practices - allowing incorrect quantity and types of data</th>
+			<li>Location: URL is https://stormy-reef-94850.herokuapp.com/</li>
+			<li>Severity: Medium - Is not directly harmful but can create privacy breaches to the database</li>
+			<li>I made a POST request with fewer data values than I should have been able to. The data I submitted was inserted as is,
+			without checking for the data quantity and types. View missing grid details below.</li>
+			<img src="pics/terminal_redirect.png" /><br>
+			<img src="pics/score_board.png" /><br>
+			<li>Recommendation: Add an if statement in the POST method of the index.js file such that it checks that all data types exists and
+			are not null. Also ensure that no other key value pairs are being entered into the database that are not expected.</li>
+		</ul>
 	</p>
-	
+	<p>
+		<ul>
+			<li>Issue #2 Found: Database Injection - Redirecting Webpage</th>
+			<li>Location: URL is https://stormy-reef-94850.herokuapp.com/</li>
+			<li>Severity: High - can be used for malicious attacks such as taking user data. Imagine a hacker creating the same page but redirecting
+			users to their version and then collecting user info to their own databse.</li>
+			<li>I injected a line of code into the database through curl to make it go to another webpage.</li>
+			<img src="pics/terminal_redirect.png" /><br>
+			<li>Difficult to show this actually occuring in a screenshot or photo. If https://stormy-reef-94850.herokuapp.com/ is typed in browser, 
+			the page will redirect.</li>
+			<li>Recommendation: Add a line of code that sanitizes and input data. In the index.js file under the POST method where the request string 
+			is taken in, it should be sanitized prior to being entered into the database. Sample code shown at bottom of report.</li>
+		</ul>
+	</p>
+	<p>
+		<ul>
+			<li>Issue #3 Found: Database Injection - Alert Pop Up Box</th>
+			<li>Location: URL is https://stormy-reef-94850.herokuapp.com/</li>
+			<li>Severity: Medium - can be used to make site look unprofessional</li>
+			<li>I injected a line of code into the database through curl to make some text pop up in an alert box</li>
+			<img src="pics/terminal_alert.png" /><br>
+			<img src="pics/alert_box.png" /><br>
+			<li>Recommendation: Add a line of code that sanitizes and input data. In the index.js file under the POST method where the request string 
+			is taken in, it should be sanitized prior to being entered into the database. Sample code shown at bottom of report.</li>
+		</ul>
+	</p>
+
 	<p>Conclusion</p>
 </body>
 </html>
